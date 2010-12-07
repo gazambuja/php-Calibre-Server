@@ -1,0 +1,70 @@
+/* ------- 1. CSS Reset ------- */
+
+strong, b{font-weight:bold;}
+em, dfn, i{font-style:italic;}
+
+/* ------- 2. General ------- */
+
+body{color:#3b3b3b;font-size:13px;margin: 0px;}
+a:link,a:visited,a:hover,a:active,a:focus{text-decoration:none;outline:none;-moz-outline-style:none;}
+a{color:#575757;}
+a:hover{color:#aaa;}
+pre,code{font-family:mono-space,monospace;white-space:pre;overflow:auto;padding:20px;}
+pre{padding:5px;}
+
+/* ------- 3. List Styles ------- */
+ul,li{list-style-type:none; list-style:none outside;margin-left:20px;}
+ol, ol li{list-style:decimal outside;}
+ol, dd{margin-left:24px;}
+ul ul, ol ul, ul ol, ol ol{margin-bottom:0;margin-top:0;}
+/* ------- 4. Borders & Dividers ------- */
+hr{border:0px solid transparent !important;background-color:transparent !important;height:1px;}
+.divider{clear:both;display:block;margin-bottom:20px;padding-top:20px;width:100%;}	
+.top{font-size:8px;line-height:10px;margin-bottom:40px;text-align:right;position:relative;}
+.top a{background:#F9F9F9 none repeat scroll 0 0; color:#bbb; height:20px; position:absolute; right:0; text-shadow:1px 1px 0 #fff; top:12px; width:20px;}
+.clearboth{clear:both;display:block;font-size:0px;height:0px;line-height:0;width:100%;}
+
+/* ------- KuboIT ------- */
+
+.header{
+	border:1px solid transparent;
+	background:#eee;
+	color:#888888;
+	font-size:12px;
+	margin:0px;
+	padding:4px 6px;
+	height: 35px;
+	text-shadow:1px 1px 0 #FFFFFF;
+}
+.list span{
+	vertical-align: middle;
+	margin:5px;
+}
+.title{
+	float: left;
+	font-size:18px;
+	display:block;
+}
+.pager{
+	float: right;
+}
+.search{
+	float: right;
+	display:block;
+}
+.textred {color:#c82828;}
+
+.book_title{font-size:16px;}
+.book_authors{font-size:13px;}
+.book_download{font-size:11px;}
+.metadata{font-size:11px;}
+.notes{font-size:11px;}
+.estantes{
+	float: center;
+	display:block;
+	width:80%;
+}
+.cover{
+	display: inline;
+	padding:4px 6px;
+}

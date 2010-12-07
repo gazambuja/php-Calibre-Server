@@ -1,0 +1,103 @@
+Prerequisites:
+
+1. 	PHP 5.3 w/GD image processing & SQLite3 support,
+            OR
+    PHP 5.2 with SQLite PDO support.
+2. 	A web server supporting PHP modules. Tested with apache 2.2, but there isn't
+    any apache-specific code in this system.
+3.  The Smarty template processor. You must have the path to the directory
+    containing Smarty.class.php. Tested I use Smarty 2.6.25.
+    Smarty caching isn't used.
+4.  The path to a calibre library (metadata.db, format, & cover files).
+
+To install:
+
+1.  Extract the zip file to a folder in web space (visible to the web server).
+2.  If a first-time install, copy config_default.php to config_local.php
+3.  Change the paths & values in config_local.php as appropriate.
+4.  Read the notes below about paths and subdirectories.
+
+NOTES ON PATHS AND SUBDIRECTORIES:
+
+Paths can be full paths or relative to the folder containing this server code.
+Full paths are better, unless they don't work in your server configuration.
+
+$config['smarty'] must be a path to a directory containing smarty. Itis
+usually something like /path components/SmartyRelease/libs. The folder must
+contain the file Smarty.class.php.
+
+$config['smarty_dir'] must be a path to a directory, should not be in web
+space, and must be writable by the web server. Create two directories in
+this folder: smarty_cache and smarty_templates_c. Both of these directories
+must be writable by the web server.
+
+$config['web_dir'] must be a path to the directory containing index.php. The
+web server need not have write access to this directory or its subdirectories.
+
+$config['smarty_web_dir'] must be a path to the directory containing the
+smarty templates. The directory must be in web space, and is usually a
+subdirectory of $config['web_dir'].
+
+$config['library_dir'] must be a path to a directory containing a calibre
+library. The database metadata.db must be in this directory.
+
+CHANGING TEMPLATES:
+
+In order to make upgrading to future releases easier, if you wish to change
+the templates, do the following:
+
+1.	Create a new subdirectory for your templates. This subdirectory must be in
+    web space.
+2.	Copy the standard templates to this directory.
+3.	Change the value of $config['smarty_web_dir'] to point at the new folder.
+4.  Edit the templates as you wish.
+
+NOTES ON SEARCHING:
+
+Supported search value tests are:
+
+*   values are bare words (no quotes & no spaces) or multiple words surrounded
+    by quotes. Examples: foo, "foo bar"
+*   field names are calibre's field names, followed by a colon, such as series:
+*   contains searches. A bare word or field:word. The test will be true of the
+    field contains the word.
+*   equal searches. =word or field:=word
+*   regular expressions. ~expression or ~/expression', with our without a
+    field prefix
+
+Supported expressions are:
+
+*   and: value_test and value_test. An 'and' test has priority over an or test.
+    For example, 'series:foo and tag:bar or author:james' is equivalent to
+    ('series:foo and tag:bar) or author:james'
+*   value_test value_test: equivalent to value_test and value_test
+*   or: value_test or value_test
+*   not: not value_test. The not keyword has the highest priority. For example,
+    'not a and b' is equivalent to '(not a) and b'
+*   parenthesized expressions: ( expression )
+
+Example: series:="fu manchu" or authors:james
+
+Notes:
+*   if quoted expressions are showing as \"....\" (and not working), then turn
+    off PHP's magic quotes feature in your .htaccess using
+          php_flag magic_quotes_gpc Off
+*   the server is (for the moment) picky about field names. For example,
+    you must say 'tags', not 'tag', and 'authors', not 'author'. Use the
+    value that calibre shows as the search term when you hover the mouse on
+    a column heading.
+
+ NOTES ON RESTRICTIONS:
+
+ You can tell the server to display only books that match a given query. See
+ 'restrict_display_to' in config_default.php. Any query you supply as a
+ restriction is ANDed with any search the user enters. Remember to change the
+ value in config_local.php so your changes won't be overwritten by future
+ releases.
+
+ If you are running under IIS or Apache as a module (if you are using one of
+ these web servers, then you almost certainly are running as a module), then
+ you can apply restrictions on a per-user basis. First, turn on authentication
+ in the manner appropriate for your web server. Second, add the restrictions as
+ described in config_local.php, as described in the comments for
+ 'restrict_display_to' in config_default.php.
